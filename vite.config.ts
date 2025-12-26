@@ -1,23 +1,21 @@
-import path from 'path';
-import { defineConfig, loadEnv } from 'vite';
-import react from '@vitejs/plugin-react';
+// --- ./vite.config.ts ---
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
-export default defineConfig(({ mode }) => {
-    const env = loadEnv(mode, '.', '');
-    return {
-      server: {
-        port: 3000,
-        host: '0.0.0.0',
-      },
-      plugins: [react()],
-      define: {
-        'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
-      },
-      resolve: {
-        alias: {
-          '@': path.resolve(__dirname, '.'),
-        }
-      }
-    };
-});
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    host: true,       // Escuchar en todas las IPs (0.0.0.0) - CRÍTICO para Docker
+    port: 5173,       // Forzar puerto 5173 - CRÍTICO para coincidir con Docker
+    strictPort: true, // Si el 5173 está ocupado, fallar en vez de cambiar al 3000
+    watch: {
+      usePolling: true // Necesario para Docker en algunos sistemas
+    }
+  },
+  build: {
+    target: 'esnext',
+    outDir: 'dist',
+    sourcemap: false
+  }
+})

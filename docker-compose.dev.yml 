@@ -1,0 +1,19 @@
+# --- ./docker-compose.dev.yml ---
+services:
+  hexagonal-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: guia_hexagonal_dev
+    ports:
+      - "5173:5173"
+    volumes:
+      # Sincronización en tiempo real:
+      # Todo lo que está en tu carpeta actual (.) se ve en (/app) dentro del contenedor
+      - .:/app
+      
+      # Excepción de Seguridad:
+      # Usa los node_modules del contenedor (Linux), no los de tu PC local.
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
