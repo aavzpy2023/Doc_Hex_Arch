@@ -1,20 +1,36 @@
+# Guía Interactiva: Arquitectura Hexagonal (Ports & Adapters)
+
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+  <img src="https://img.shields.io/badge/Status-Production-success?style=for-the-badge" alt="Status" />
+  <img src="https://img.shields.io/badge/Stack-React_19_%7C_Vite_%7C_Tailwind-blue?style=for-the-badge" alt="Stack" />
+  <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
 </div>
 
-# Run and deploy your AI Studio app
+## 📋 Descripción del Proyecto
 
-This contains everything you need to run your app locally.
+Esta aplicación es una **Guía de Referencia Técnica Interactiva** diseñada para desmitificar la Arquitectura Hexagonal (Ports and Adapters). A diferencia de la documentación estática tradicional, este proyecto ofrece una experiencia de navegación fluida con ejemplos de código en **Python Moderno** (Type Hints, Dataclasses, SOLID) listos para copiar.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1BXcRTmNh3LqNVjdm1TyO_PV89zaMGDM4
+El objetivo es demostrar cómo desacoplar la lógica de negocio (Dominio) de los detalles de infraestructura (Frameworks, BDs), alineado con los principios de diseño de software de alta calidad.
 
-## Run Locally
+## 🚀 Características Técnicas
 
-**Prerequisites:**  Node.js
+*   **Enfoque Educativo:** Desglose paso a paso desde el "Problema del Acoplamiento" hasta la "Inversión de Dependencias".
+*   **Stack Moderno:** Construido con React 19, Vite y TailwindCSS para un rendimiento óptimo.
+*   **Ejemplos de Grado Militar:** Código Python que utiliza patrones avanzados:
+    *   `@dataclass(frozen=True)` para Value Objects inmutables.
+    *   Patrón Repository para abstracción de persistencia.
+    *   Inyección de Dependencias.
+*   **Despliegue Contenerizado:** Arquitectura Docker Multi-Stage optimizada (imagen final < 30MB).
 
+## 🛠️ Instalación y Ejecución Local
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### Opción A: Ejecución con Docker (Recomendado)
+
+El proyecto incluye una configuración de producción con Nginx como servidor reverso.
+
+```bash
+# 1. Construir y levantar el contenedor
+docker-compose up -d --build
+
+# 2. Acceder a la guía
+# Abre tu navegador en http://localhost

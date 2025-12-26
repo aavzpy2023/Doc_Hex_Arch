@@ -1,0 +1,25 @@
+# --- ./docker-compose.yml ---
+services:
+  app-hexagonal-guide:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: guia_hexagonal_frontend
+    restart: always
+    ports:
+      # Mapeamos el puerto 80 local al 8080 del contenedor
+      - "80:8080"
+    environment:
+      - NODE_ENV=production
+    # Healthcheck para asegurar que Nginx está respondiendo
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    # Limita recursos para simular entorno real (opcional, buena práctica)
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
